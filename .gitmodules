@@ -1,0 +1,3 @@
+[submodule "merklizer"]
+	path = merklizer
+	url = https://github.com/alsenet-labs/merklizer
