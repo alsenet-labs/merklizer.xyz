@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/bundle.css">
+  <script src="js/index.min.js">This page does require javascript</script>
+</head>
+
+<body>
+  <div id="content">
+  <div id="text">
+    <h1 class="to-be-hidden">
+    Welcome to merklizer
+  </h1>
+    <p class="to-be-hidden">
+    A free software interface for data anchoring and verifying on public blockchains.
+    </p>
+    <p class="to-be-hidden">
+    Your interface is loaded from <span id="location"></span>
+    <script>
+      document.getElementById('location').innerText=document.location.origin;
+    </script>
+    </p>
+    <p class="to-be-hidden">
+    Your files are not uploaded, they are processed locally in your browser.
+    </p>
+    <p class="show-on-anchor">
+    If you want to verify files, <a href="javascript:$('iframe')[0].contentWindow.postMessage({type:'transition',toState:'validateFile'})">click here</a>
+    </p>
+    <p class="show-on-verify">
+     If you want to anchor files, <a href="javascript:$('iframe')[0].contentWindow.postMessage({type:'transition',toState:'anchor'})">click here</a>
+    </p>
+    <p class="to-be-hidden show-on-verify">
+    To anchor files you will need a web3 provider such as metamask plugin.
+    </p>
+  </div>
+  <iframe src="app/#!/validate-file"></iframe>
+    <footer>
+    Brought to you by Luc Deschenaux & Alexandre Poltorak<br />
+    &copy; <span id="year"></span><script>document.getElementById('year').innerText=new Date().getFullYear();</script> Alsenet SA, GNU AGPL v3
+  </footer>
+
+  <a href="https://github.com/alenet-labs/merklizer"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+</div>
+</body>
+</html>
