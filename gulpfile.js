@@ -136,6 +136,8 @@ gulp.task('dist', function(){
    .pipe(gulp.dest('./dist/css/')));
    streams.push(gulp.src('./client/app/images/*')
    .pipe(gulp.dest('./dist/images/')));
+   streams.push(gulp.src('./merklizer/webapp/dist/**')
+   .pipe(gulp.dest('./dist/app/')));
    return merge.apply(null,streams);
 
 
