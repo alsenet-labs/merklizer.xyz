@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Merklizer</title>
   <link rel="stylesheet" href="css/bundle.css">
   <script src="js/index.min.js">This page does require javascript</script>
 </head>
 
-<body>
+<body data-loading>
+  <div class="lds-ripple"><div></div><div></div></div>
   <div id="content">
   <div id="text">
-    <h1 class="to-be-hidden">
-    Welcome to merklizer
-  </h1>
+    <p class="title to-be-hidden">
+    WELCOME TO MERKLIZER
+    </p>
     <p class="to-be-hidden">
     A free software interface for data anchoring and verifying on public blockchains.
     </p>
@@ -23,14 +25,18 @@
     <p class="to-be-hidden">
     Your files are not uploaded, they are processed locally in your browser.
     </p>
+    <p class="to-be-hidden">
+    To anchor files you will need a web3 wallet such as <a href="https://metamask.io/" target="_blank">Metamask</a> plugin.
+    </p>
     <p class="show-on-anchor">
-    If you want to verify files, <a href="javascript:$('iframe')[0].contentWindow.postMessage({type:'transition',toState:'validateFile'})">click here</a>
+    <span class="to-be-hidden">Click or drop files to anchor below.</span>
+    <span class="to-be-shown title">ANCHORING FILES</span>
+    <apan>If you want to verify files, <a href="javascript:$('iframe')[0].contentWindow.postMessage({type:'transition',toState:'validateFile'})">click here</a></span>
     </p>
     <p class="show-on-verify">
-     If you want to anchor files, <a href="javascript:$('iframe')[0].contentWindow.postMessage({type:'transition',toState:'anchor'})">click here</a>
-    </p>
-    <p class="to-be-hidden show-on-verify">
-    To anchor files you will need a web3 provider such as metamask plugin.
+     <span class="to-be-hidden">Click or drop files to verify below.</span>
+     <span class="to-be-shown title">VALIDATING FILES</span>
+     <span>If you want to anchor files, <a href="javascript:$('iframe')[0].contentWindow.postMessage({type:'transition',toState:'anchor'})">click here</a></span>
     </p>
   </div>
   <iframe src="app/#!/validate-file"></iframe>
@@ -39,7 +45,7 @@
     &copy; <span id="year"></span><script>document.getElementById('year').innerText=new Date().getFullYear();</script> Alsenet SA, GNU AGPL v3
   </footer>
 
-  <a href="https://github.com/alenet-labs/merklizer"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <a href="https://github.com/alsenet-labs/merklizer.xyz"><img id="github" style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 </div>
 </body>
 </html>
