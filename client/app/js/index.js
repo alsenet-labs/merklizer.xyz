@@ -5,7 +5,7 @@ var prevState='validateFile';
 
 window.addEventListener('message',receiveMessage,false);
 function receiveMessage(msg){
-  if (msg.origin!=document.location.origin) {
+  if (msg.origin!=window.location.origin) {
     console.log(msg);
     return;
   }
@@ -35,13 +35,13 @@ function receiveMessage(msg){
           case 'chooser':
           case 'validate':
           case 'validateQrCode':
-            $('iframe')[0].contentWindow.postMessage({type:'transition',toState:prevState, reload: true});
+            $('iframe')[0].contentWindow.postMessage({type:'transition',toState:prevState, reload: true}, window.location.origin);
             return;
             break;
         }
         switch(msg.data.fromState) {
           case 'report':
-            $('iframe')[0].contentWindow.postMessage({type:'transition',toState:prevState, reload: true});
+            $('iframe')[0].contentWindow.postMessage({type:'transition',toState:prevState, reload: true}, window.location.origin);
             return;
             break;
         }
