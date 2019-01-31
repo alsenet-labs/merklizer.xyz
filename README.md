@@ -1,6 +1,6 @@
 # merklizer.xyz
 
-Web interface based on [https://github.com/alsenet-labs/merklizer](https://github.com/alsenet-labs/merklizer)
+Web interface integrating [https://github.com/alsenet-labs/merklizer](https://github.com/alsenet-labs/merklizer)
 
 
 # Run and test with
