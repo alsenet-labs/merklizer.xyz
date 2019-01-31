@@ -2,6 +2,8 @@
 
 Web interface integrating [https://github.com/alsenet-labs/merklizer](https://github.com/alsenet-labs/merklizer)
 
+See it in action on https://merklizer.xyz
+
 
 ## Run and test with
 ```
