@@ -1,6 +1,6 @@
 {
   "name": "merklizer.xyz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -23,9 +23,11 @@
     "browser-sync": "^2.26.3",
     "browserify": "^16.2.3",
     "browserify-css": "^0.14.0",
+    "del": "^4.0.0",
     "event-stream": "3.3.4",
     "fs-extra": "^7.0.0",
     "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1",
     "gulp-debug": "^4.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
@@ -38,7 +40,6 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "gulp-cli": "^2.0.1",
     "jquery": "^3.3.1",
     "request": "^2.88.0"
   }
