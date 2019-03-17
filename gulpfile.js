@@ -27,6 +27,7 @@ var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var rename = require('gulp-rename');
+var del = require('del') ;
 
 gulp.task('browserSync',function(){
     browserSync.init(["client/app/css/bundle.css", "client/app/js/index.min.js","./client/app/index.html",'./client/app/views/**.html'], {
@@ -34,21 +35,14 @@ gulp.task('browserSync',function(){
           ignoreInitial: true
         },
         server: {
-            baseDir: "./client/app/"
+            baseDir: "./client/app/",
+            routes: {
+              "/app": "merklizer/webapp/client/app"
+            }
         },
         https: true
     });
 });
-
-/*
-gulp.task('copy', function () {
-   var streams=[];
-   streams.push(gulp.src('./node_modules/bootstrap/dist/css/*')
-   .pipe(gulp.dest('./client/app/css/')));
-   return merge.apply(null,streams);
-});
-*/
-
 
 gulp.task('sass', function () {
 
@@ -76,7 +70,6 @@ gulp.task('watchify', require('./gulptasks/browserify.js')({
 
 gulp.task('watch', function(){
       return gulp.watch("./client/app/sass/**.scss", ['sass']);
-//      gulp.watch(["./client/app/index.html",'./client/app/views/**.html']).on ('change',browserSync.reload);
 });
 
 function callback(err,msg){
@@ -85,7 +78,6 @@ function callback(err,msg){
 
 gulp.task('run', function() {
   return runSequence(
-//    'copy',
     'sass',
     'watch',
     'watchify',
@@ -98,7 +90,6 @@ gulp.task('default',['run']);
 
 gulp.task('build', function(callback){
   runSequence(
-//    'copy',
     'sass',
     'browserify',
     'dist',
@@ -111,7 +102,6 @@ gulp.task('build', function(callback){
 
 gulp.task('build-ugly', function(callback){
   runSequence(
-//    'copy',
     'sass',
     'browserify-ugly',
     'dist',
@@ -122,14 +112,23 @@ gulp.task('build-ugly', function(callback){
   );
 });
 
-gulp.task('dist', function(){
+gulp.task('clean:gh-pages', function(cb) {
+    return del(['./docs/*','!./docs/CNAME'], cb);
+});
+
+gulp.task('gh-pages', ['clean:gh-pages','dist'], function(){
+  return gulp.src('./dist/**')
+  .pipe(gulp.dest('./docs/'));
+});
+
+gulp.task('clean:dist', function(cb) {
+    return del(['./dist'], cb);
+});
+
+gulp.task('dist', ['clean:dist'], function(){
    var streams=[];
    streams.push(gulp.src('./client/app/index.html')
    .pipe(gulp.dest('./dist/')));
-/*
-   streams.push(gulp.src('./client/app/views/*')
-   .pipe(gulp.dest('./dist/views/')));
-*/
    streams.push(gulp.src('./client/app/js/index.min.*')
    .pipe(gulp.dest('./dist/js/')));
    streams.push(gulp.src('./client/app/css/bundle.*')
@@ -139,6 +138,5 @@ gulp.task('dist', function(){
    streams.push(gulp.src('./merklizer/webapp/dist/**')
    .pipe(gulp.dest('./dist/app/')));
    return merge.apply(null,streams);
-
 
 });
