@@ -28,6 +28,13 @@ var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var rename = require('gulp-rename');
 var del = require('del') ;
+var rev = require('gulp-rev');
+var log = require('fancy-log');
+var path = require('path');
+var es = require('event-stream');
+var htmlreplace = require('gulp-html-replace');
+var fs = require('fs');
+var shell = require('shelljs');
 
 gulp.task('browserSync',function(){
     browserSync.init(["client/app/css/bundle.css", "client/app/js/index.min.js","./client/app/index.html",'./client/app/views/**.html'], {
@@ -93,6 +100,7 @@ gulp.task('build', function(callback){
     'sass',
     'browserify',
     'dist',
+    'rev',
     function(err){
       if (err) console.log(err.message);
       callback(err);
@@ -105,6 +113,7 @@ gulp.task('build-ugly', function(callback){
     'sass',
     'browserify-ugly',
     'dist',
+    'rev',
     function(err){
       if (err) console.log(err.message);
       callback(err);
@@ -116,7 +125,7 @@ gulp.task('clean:gh-pages', function(cb) {
     return del(['./docs/*','!./docs/CNAME'], cb);
 });
 
-gulp.task('gh-pages', ['clean:gh-pages','dist'], function(){
+gulp.task('gh-pages', ['clean:gh-pages','build-ugly'], function(){
   return gulp.src('./dist/**')
   .pipe(gulp.dest('./docs/'));
 });
@@ -140,3 +149,41 @@ gulp.task('dist', ['clean:dist'], function(){
    return merge.apply(null,streams);
 
 });
+
+var revFiles=[];
+// rename in place rev files (and their optional map file)
+var renameRevFiles=function(es){
+  revFiles.splice(0);
+  return es.map(function(file,cb){
+    var basename=path.basename(file.revOrigPath).split('.');
+    basename[0]=basename[0]+'-'+file.revHash;
+    basename=basename.join('.');
+    var dest=path.join(file.revOrigBase,basename);
+    fs.renameSync(file.revOrigPath, dest);
+    revFiles.push({orig: file.revOrigPath, rev: dest});
+    try { fs.renameSync(file.revOrigPath+'.map', dest+'.map'); } catch(e) {}
+    return cb(null,file);
+  });
+}
+
+// replace reference to rev files in specified html
+var injectRev=function(es,html){
+  var html=path.resolve(html);
+  var base=path.dirname(html);
+  return es.map(function(file,cb){
+    revFiles.forEach(function(file){
+      var orig=file.orig.substr(base.length+1);
+      var rev=file.rev.substr(base.length+1);
+      shell.sed('-i','"'+orig+'"','"'+rev+'"',html);
+    });
+    return cb(null,file);
+  });
+}
+
+gulp.task('rev', ['dist'], function(){
+  gulp.src(['./dist/js/index.min.js', './dist/css/bundle.css'])
+    .pipe(rev())
+    .pipe(renameRevFiles(es))
+    .pipe(injectRev(es,'./dist/index.html'));
+});
+
