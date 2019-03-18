@@ -1,10 +1,18 @@
-.PHONY: gh-pages dist merklizer
+.PHONY: all merklizer merklizer.xyz unsafe-build safe-build
 
-all: merklizer merklizer.xyz
+all: safe-build
+
+unsafe: merklizer merklizer.xyz
 
 merklizer.xyz: merklizer
 	yarn && gulp gh-pages
 
 merklizer:
 	cd merklizer && make webapp-ugly 
+
+safe-build: 
+	cd nodejs-docker \
+	 &&	docker build . -t nodejs \
+	 && cd .. \
+	 && ./safe-build.sh 2>&1
 
