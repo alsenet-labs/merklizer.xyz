@@ -2,7 +2,7 @@
 
 all: safe-build
 
-unsafe: merklizer merklizer.xyz
+unsafe-build: merklizer merklizer.xyz
 
 merklizer.xyz: merklizer
 	yarn && gulp gh-pages
