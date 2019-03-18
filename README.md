@@ -5,17 +5,17 @@ Web interface integrating [https://github.com/alsenet-labs/merklizer](https://gi
 See it in action on https://merklizer.xyz
 
 
+## Build submodule Merklizer with
+```
+make merklizer
+```
+
 ## Run and test with
 ```
 gulp
 ```
 
-## Rebuild submodule Merklizer with
-```
-make merklizer
-```
-
-## Rebuild GitHub pages with
+## Build GitHub pages with
 ```
 make
 ```
