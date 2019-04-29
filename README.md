@@ -49,12 +49,20 @@ docker volume rm merklizer.xyz
 Check the docker documentation for more.
 
 ## Work in the container (git, gulp...)
-Restart the container with eg
+### Restart the container with eg
 ```
-docker start merklizer.xyz -ai 
+docker start merklizer.xyz
+```
+### Run a shell in the container with eg
+```
+docker exec -it merklizer.xyz /bin/bash -l
+```
+or eg
+```
+docker exec -it merklizer.xyz /bin/bash -l -e 'screen -s /bin/bash'
 ```
 
-### eg Run and test with
+### Run and test web application with eg
 ```
 docker start merklizer.xyz -ai << EOF
 cd /home/nodejs/src/merklizer.xyz
