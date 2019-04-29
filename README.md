@@ -59,4 +59,5 @@ docker start merklizer.xyz -ai
 docker start merklizer.xyz -ai << EOF
 cd /home/nodejs/src/merklizer.xyz
 gulp
+EOF
 ```
