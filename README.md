@@ -62,6 +62,19 @@ or eg
 docker exec -it merklizer.xyz /bin/bash -l -e 'screen -s /bin/bash'
 ```
 
+#### Update gh-pages
+eg after rebuilding the container, with: 
+```
+docker start merklizer.xyz -ai << EOF
+cd /home/nodejs/src/merklizer.xyz
+git add docs
+git commit docs -m "update gh-pages"
+git config user.name "<your-name>"
+git config user.email "<your-email>"
+git push origin master
+EOF
+```
+
 ### Run and test web application with eg
 ```
 docker start merklizer.xyz -ai << EOF
