@@ -67,10 +67,10 @@ eg after rebuilding the container, with:
 ```
 docker start merklizer.xyz -ai << EOF
 cd /home/nodejs/src/merklizer.xyz
+git config user.name "$(git config user.name)"
+git config user.email "$(git config user.email)"
 git add docs
 git commit docs -m "update gh-pages"
-git config user.name "<your-name>"
-git config user.email "<your-email>"
 git push origin master
 EOF
 ```
