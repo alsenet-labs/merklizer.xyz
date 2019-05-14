@@ -5,14 +5,14 @@ all: safe-build
 unsafe-build: merklizer merklizer.xyz
 
 merklizer.xyz: merklizer
-  yarn && gulp gh-pages
+	yarn && gulp gh-pages
 
 merklizer:
-  cd merklizer && make webapp-ugly 
+	cd merklizer && make webapp-ugly 
 
 safe-build: 
-  cd nodejs-docker \
-   &&  docker build . -t nodejs \
-   && cd .. \
-   && ./safe-build.sh 2>&1
+	cd nodejs-docker \
+  &&  docker build . -t nodejs \
+  && cd .. \
+  && ./safe-build.sh 2>&1
 
