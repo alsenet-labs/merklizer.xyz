@@ -21,6 +21,7 @@
 */
 
 var gulp = require('gulp');
+var replace = require('gulp-replace');
 var debug = require('gulp-debug');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync');
@@ -34,6 +35,11 @@ var es = require('event-stream');
 var fs = require('fs');
 var shell = require('shelljs');
 var browserify = require('./gulptasks/browserify.js');
+var version = {
+  core: require('./package.json').version,
+  engine: require('./merklizer/webapp/package.json').version
+}
+console.log (version);
 
 gulp.task('browserSync',function(){
     browserSync.init(["client/app/css/bundle.css", "client/app/js/index.min.js","./client/app/index.html",'./client/app/views/**.html'], {
@@ -101,6 +107,8 @@ gulp.task('clean:dist', function(cb) {
 gulp.task('dist', function(){
    var streams=[];
    streams.push(gulp.src('./client/app/index.html')
+   .pipe(replace('CORE_VERSION',version.core))
+   .pipe(replace('ENGINE_VERSION',version.engine))
    .pipe(gulp.dest('./dist/')));
    streams.push(gulp.src('./client/app/js/index.min.*')
    .pipe(gulp.dest('./dist/js/')));
