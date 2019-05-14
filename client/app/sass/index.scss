@@ -1,4 +1,3 @@
-
 html, body {
   margin: 0;
   padding: 0;
@@ -157,6 +156,11 @@ body[data-merklizer-state=validateFile].hide-intro .show-on-verify.to-be-hidden-
   font-size: large;
   font-weight: bold;
   text-align:center;
+}
+
+.version {
+  font-size: small;
+  font-weight: normal;
 }
 
 .big {
