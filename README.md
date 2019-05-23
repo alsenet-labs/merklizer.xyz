@@ -29,11 +29,15 @@ See it in action on https://merklizer.xyz
 
 You can build the static webpages in a docker container with
 ```
-make
+make  # NB: the remote repository will be used for the build
 ```
 Then you can bind or copy the dist directory somewhere, on linux it is located at
 ```
 /var/lib/docker/volumes/merklizer.xyz/_data/dist
+```
+On the other hand you can build the static webpages on your host from the local repository, at your risks and perils:
+```
+make unsafe-build
 ```
 
 ## Clean
