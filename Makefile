@@ -1,3 +1,5 @@
+NODE_VERSION ?= --lts
+
 .PHONY: all merklizer merklizer.xyz unsafe-build safe-build
 
 all: safe-build
@@ -11,8 +13,9 @@ merklizer:
 	cd merklizer && make webapp-ugly 
 
 safe-build: 
+	set -x && \
 	cd nodejs-docker \
-  &&  docker build . -t nodejs \
+  && docker build --build-arg node_version=$(NODE_VERSION) -t nodejs . \
   && cd .. \
   && ./safe-build.sh merklizer.xyz 2>&1
 
