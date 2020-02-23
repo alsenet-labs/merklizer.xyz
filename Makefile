@@ -13,7 +13,6 @@ merklizer:
 	cd merklizer && make webapp-ugly 
 
 safe-build: 
-	set -x && \
 	cd nodejs-docker \
   && docker build --build-arg node_version=$(NODE_VERSION) -t nodejs . \
   && cd .. \
