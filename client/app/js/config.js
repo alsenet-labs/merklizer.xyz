@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2019 ALSENET SA
+* Copyright (c) 2018-2020 ALSENET SA
 *
 * Author(s):
 *
@@ -20,25 +20,38 @@
 *
 */
 
-require('../css/main.css');
-window.angular=require('angular');
-require('@uirouter/angularjs/release/angular-ui-router.js');
-window.jQuery=window.$=require('jquery');
+"use strict";
 
+module.exports=[
+  '$stateProvider',
+  '$locationProvider',
+  '$urlRouterProvider',
+  function(
+    $stateProvider,
+    $locationProvider,
+    $urlRouterProvider
+  ){
 
-// force https
-if (window.location.protocol!='https:') {
-  var href=window.location.href.replace(/[^:]+/,'https');
-  window.location.assign(href);
-}
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
 
-angular.module(
-  "app",
-   [
-     'ui.router',
-   ]
-)
-.config(require('./config.js'))
-.run(require('./run.js'))
-.controller("MainCtrl", require('./controllers/main.js'))
-.controller("HomeCtrl", require('./controllers/home.js'));
+    $urlRouterProvider.otherwise(function($injector){
+      $injector.invoke(['$state', function($state) {
+        $state.go('home', {}, { location: true } );
+      }]);
+    });
+
+    $stateProvider
+    .state('home', {
+      url: '/',
+      templateUrl: 'views/home.html',
+      controller: 'HomeCtrl',
+      controllerAs: 'home',
+      title: 'Merklizer',
+      params: {
+      }
+    })
+  }
+];

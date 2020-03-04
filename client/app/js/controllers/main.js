@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2019 ALSENET SA
+* Copyright (c) 2018-2020 ALSENET SA
 *
 * Author(s):
 *
@@ -20,25 +20,37 @@
 *
 */
 
-require('../css/main.css');
-window.angular=require('angular');
-require('@uirouter/angularjs/release/angular-ui-router.js');
-window.jQuery=window.$=require('jquery');
+'use strict';
 
+/**
+ * @ngdoc function
+ * @name app.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the app
+ */
 
-// force https
-if (window.location.protocol!='https:') {
-  var href=window.location.href.replace(/[^:]+/,'https');
-  window.location.assign(href);
-}
+module.exports=[
+  '$scope',
+  '$rootScope',
+  function (
+    $scope,
+    $rootScope
+  ) {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
 
-angular.module(
-  "app",
-   [
-     'ui.router',
-   ]
-)
-.config(require('./config.js'))
-.run(require('./run.js'))
-.controller("MainCtrl", require('./controllers/main.js'))
-.controller("HomeCtrl", require('./controllers/home.js'));
+    angular.merge($scope,{
+      init: function(){
+      },
+      t: {
+        welcome: "WELCOME TO MERKLIZER"
+      }
+    });
+
+    $scope.init();
+  }
+];
