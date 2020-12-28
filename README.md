@@ -39,10 +39,14 @@ On the other hand you can build the static webpages on your host from the local 
 ```
 make unsafe-build
 ```
+Then you can start the local build with:
+```
+gulp
+```
 
 ## Clean
 When you are finished, you can remove the docker container with eg
-``` 
+```
 docker rm merklizer.xyz
 ```
 or the associated docker volume with
@@ -67,7 +71,7 @@ docker exec -it merklizer.xyz /bin/bash -l -e 'screen -s /bin/bash'
 ```
 
 #### Update gh-pages
-eg after rebuilding the container, with: 
+eg after rebuilding the container, with:
 ```
 docker start merklizer.xyz -ai << EOF
 cd /home/nodejs/src/merklizer.xyz
