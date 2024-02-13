@@ -1,7 +1,5 @@
-FROM debian:stretch
-ARG debian_mirror=deb.debian.org
-RUN sed -r -i -e s/deb.debian.org/$debian_mirror/ /etc/apt/sources.list \
-  && apt-get update \
+FROM debian:bookworm
+RUN apt-get update \
   && apt-get install -y --force-yes \
       build-essential \
       bzip2 \
@@ -9,10 +7,10 @@ RUN sed -r -i -e s/deb.debian.org/$debian_mirror/ /etc/apt/sources.list \
       curl \
       git \
       wget \
-      python \
+      python3 \
       libexpat1-dev \
-      ruby2.3 \
-      ruby2.3-dev \
+      ruby3.1 \
+      ruby3.1-dev \
       vim \
       screen \
       net-tools \
@@ -40,7 +38,5 @@ RUN export NVM_DIR="/home/$user/.nvm" \
  && npm install -g npm \
       yarn \
       grunt-cli \
-      gulp@4 \
- && mkdir src
-EXPOSE 3000-3001
+      gulp@4
 CMD bash -l

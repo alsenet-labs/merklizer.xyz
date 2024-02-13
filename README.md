@@ -5,7 +5,7 @@ Web interface integrating [https://github.com/alsenet-labs/merklizer](https://gi
 See it in action on https://merklizer.xyz
 
 ## Copyright
- Copyright (c) 2018-2021 ALSENET SA
+ Copyright (c) 2018-2024 ALSENET SA
 
 ## Authors
   * Alexandre Poltorak <polto@alsenet.com>
