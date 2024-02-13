@@ -1,7 +1,5 @@
 FROM debian:bookworm
-ARG debian_mirror=deb.debian.org
-RUN echo sed -r -i -e s/deb.debian.org/$debian_mirror/ /etc/apt/sources.list \
-  && apt-get update \
+RUN apt-get update \
   && apt-get install -y --force-yes \
       build-essential \
       bzip2 \
