@@ -35,6 +35,12 @@ Then you can bind or copy the dist directory somewhere, on linux it is located a
 ```
 /var/lib/docker/volumes/merklizer.xyz/_data/dist
 ```
+And you can update them with eg:
+```
+git rm docs/js/*
+sudo rsync -a /var/lib/docker/volumes/merklizer.xyz/_data/dist/ docs/
+sudo chown $USER.$USER docs -R
+```
 On the other hand you can build the static webpages on your host from the local repository, at your risks and perils:
 ```
 make unsafe-build
