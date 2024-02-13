@@ -13,7 +13,7 @@ docker run --rm --name $PACKAGE --mount source=$PACKAGE,destination=/home/nodejs
 docker run --name $PACKAGE --mount source=$PACKAGE,destination=/home/nodejs/src/$PACKAGE -i nodejs << EOF
 set -x
 cd src/$PACKAGE
-git clone --recursive $(git config --get remote.origin.url) .
+git clone --recursive $(git config --get remote.origin.url | sed -e 's#git@github.com:#https://github.com/#') .
 grep version merklizer/webapp/package.json
 make unsafe-build && echo 'The package is available in /var/lib/docker/volumes/$PACKAGE/_data/dist'
 EOF
