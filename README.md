@@ -29,7 +29,7 @@ See it in action on https://merklizer.xyz
 
 You can build the static webpages in a docker container with
 ```
-env NODE_VERSION=v10 make  # NB: the remote repository will be used for the build
+env NODE_VERSION=v10 make  # NB: the remote repository will be used for the build and you need to fetch the tags
 ```
 Then you can bind or copy the dist directory somewhere, on linux it is located at
 ```
